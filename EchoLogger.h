@@ -142,12 +142,14 @@ typedef NS_ENUM(NSUInteger, EchoLogLevel) {
 /** Bitflag of levels to show. Default = All */
 @property (atomic) NSUInteger logLevels;
 
-/** List of "channels" to exclude. Usually the file/class names */
-@property (atomic, strong) NSSet *excludedChannels;
+/** List of "channels" to exclude. Usually NSString of the file/class names in all caps å*/
+@property (atomic, strong) NSArray *excludedChannels;
 
 /** The levels to check along with the exclusions. If the level is not in here then it will be shown. Default = TRACE|DEBUG|INFO|WARN */
 @property (atomic) EchoLogLevel logLevelsForExcluded;
 
+/** Assign excluded from dictionary of channel name => BOOL */
+- (void)setExcludedChannelsWithDictionary:(NSDictionary *)dictionary;
 
 /** 
  Usually you'll want to use the macros above but it's fine to call manually or to make your own macros

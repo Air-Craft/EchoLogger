@@ -28,6 +28,23 @@
 
 //---------------------------------------------------------------------
 
+- (void)setExcludedChannelsWithDictionary:(NSDictionary *)dictionary
+{
+    NSMutableArray *excludedChannels = dictionary.allKeys.mutableCopy;
+    for (id chan in excludedChannels.copy)
+    {
+        // Default to allow if not added. Otherwise YES means allow so remove from excluded list
+        if ([dictionary[chan] boolValue])
+        {
+            [excludedChannels removeObject:chan];
+        }
+    }
+    
+    self.excludedChannels = excludedChannels;
+}
+
+//---------------------------------------------------------------------
+
 - (void)logWithLevel:(EchoLogLevel)level
              channel:(NSString *)channel
                 line:(int)line
